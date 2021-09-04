@@ -7,6 +7,10 @@ namespace ApiDZ.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+            Id = new Guid();
+        }
         public Guid Id { get; set; }
         public string Category { get; set; }
         public string ProductName { get; set; }
