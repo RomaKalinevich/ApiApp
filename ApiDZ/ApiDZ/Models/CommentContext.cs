@@ -8,7 +8,7 @@ namespace ApiDZ.Models
 {
     public class CommentContext : DbContext
     {
-        public DbSet<Comment> Users { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public CommentContext(DbContextOptions<CommentContext> options)
             : base(options)
         {
