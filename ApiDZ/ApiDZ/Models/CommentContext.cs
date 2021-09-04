@@ -12,7 +12,7 @@ namespace ApiDZ.Models
         public CommentContext(DbContextOptions<CommentContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
     }
 }

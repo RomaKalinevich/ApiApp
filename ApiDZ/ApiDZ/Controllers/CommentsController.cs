@@ -1,21 +1,19 @@
-﻿using ApiDZ.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using ApiDZ.Models;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System;
 
 namespace ApiDZ.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class CommentsController : ControllerBase
     {
         CommentContext db;
-        public UsersController(CommentContext context)
+        public CommentsController(CommentContext context)
         {
             db = context;
             if (!db.Comments.Any())
@@ -31,7 +29,7 @@ namespace ApiDZ.Controllers
             return await db.Comments.ToListAsync();
         }
 
-        // GET api/users/5
+        // GET api/comments/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Comment>> Get(Guid id)
         {
@@ -43,48 +41,48 @@ namespace ApiDZ.Controllers
 
         // POST api/users
         [HttpPost]
-        public async Task<ActionResult<Comment>> Post(Comment user)
+        public async Task<ActionResult<Comment>> Post(Comment comment)
         {
-            if (user == null)
+            if (comment == null)
             {
                 return BadRequest();
             }
 
-            db.Comments.Add(user);
+            db.Comments.Add(comment);
             await db.SaveChangesAsync();
-            return Ok(user);
+            return Ok(comment);
         }
 
         // PUT api/users/
         [HttpPut]
-        public async Task<ActionResult<Comment>> Put(Comment user)
+        public async Task<ActionResult<Comment>> Put(Comment comment)
         {
-            if (user == null)
+            if (comment == null)
             {
                 return BadRequest();
             }
-            if (!db.Comments.Any(x => x.Id == user.Id))
+            if (!db.Comments.Any(x => x.Id == comment.Id))
             {
                 return NotFound();
             }
 
-            db.Update(user);
+            db.Update(comment);
             await db.SaveChangesAsync();
-            return Ok(user);
+            return Ok(comment);
         }
 
         // DELETE api/users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Comment>> Delete(Guid id)
         {
-            Comment user = db.Comments.FirstOrDefault(x => x.Id == id);
-            if (user == null)
+            Comment comment = db.Comments.FirstOrDefault(x => x.Id == id);
+            if (comment == null)
             {
                 return NotFound();
             }
-            db.Comments.Remove(user);
+            db.Comments.Remove(comment);
             await db.SaveChangesAsync();
-            return Ok(user);
+            return Ok(comment);
         }
     }
 }
